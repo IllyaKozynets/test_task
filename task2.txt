@@ -1,0 +1,5 @@
+SELECT DISTINCT user.id as f,user.email,user_profile.name,user_profile.patronymic,user_profile.surname,user_profile.money,
+(SELECT COUNT(user_token.id) from user_token  where user_token.user_id = f) as tokens
+FROM user,user_profile,user_token
+WHERE user.id=user_profile.user_id
+AND user.is_active=1
